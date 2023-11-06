@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "debian/bullseye64"
+  
+    config.vm.provider "virtualbox" do |v|
+      v.name = "vm_debian"
+      v.gui = false
+      v.memory = 2048
+      v.cpus = 2
+    end  
+    
+    config.vm.define "host1" do |host1|
+      host1.vm.network "private_network", type: "dhcp",
+        name: "VirtualBox Host-Only Ethernet Adapter"
+      host1.vm.hostname = "zdeploy"
+    end
+  
+    config.vm.provision :file, source: 'C:\Users\Matteo\Downloads\msnake', destination: "/tmp/msnake"
+    config.vm.provision "shell", inline: <<-SHELL
+      apt update
+      apt upgrade -y
+      apt install -y vim neofetch
+    SHELL
+  end
+  
+  
