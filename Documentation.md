@@ -141,7 +141,7 @@ exo1
 
 - Une fois l'arborescence créée ainsi que les fichiers nécessaires copiés nous allons créer le chroot
 - Pour se faire, il faut utiliser la commande `sudo chroot exo1 msnake`, ceci va :
-  - Créer le chroot dans le fichier exo1
+  - Créer l'environnement chroot dans le directory exo1
   - Lancer le binaire msnake
 
 ```bash
