@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", inline: <<-SHELL
       apt update
       apt upgrade -y
-      apt install -y vim neofetch
+      apt install -y vim neofetch lxc debootstrap systemd-container
     SHELL
   end
   
