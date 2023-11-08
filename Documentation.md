@@ -14,7 +14,7 @@
   - [Exercice 2 : Exécution sous LXC](#exercice-2--exécution-sous-lxc)
     - [Installation LXC](#installation-lxc)
     - [Création du conteneur LXC](#création-du-conteneur-lxc)
-    - [TODO](#todo)
+    - [Démarrage et connection au conteneur LXC](#démarrage-et-connection-au-conteneur-lxc)
   - [Exercice 3 : Exécution sous systemd-nspawn](#exercice-3--exécution-sous-systemd-nspawn)
     - [Préparation de l'environnement](#préparation-de-lenvironnement)
     - [Création du conteneur systemd-nspawn](#création-du-conteneur-systemd-nspawn)
@@ -219,7 +219,7 @@ You just created an Alpinelinux edge x86_64 (20231105_13:00) container.
 >
 - Le résultat de la commande nous valide la création de notre conteneur.
 
-### TODO
+### Démarrage et connection au conteneur LXC
 
 ```bash
 vagrant@zdeploy:~$ sudo lxc-start -n alpine-container
@@ -320,7 +320,7 @@ debian10/
 vagrant@zdeploy:~$ sudo systemd-nspawn -D ~/debian10
 Spawning container debian10 on /home/vagrant/debian10.
 Press ^] three times within 1s to kill container.
-root@debian10:~#    
+root@debian10:~#
 ```
 
 - Une fois dans le conteneur on installe le paquet neofetch puis on l'exécute. Et on peut bien voir que la sortie nous montre que nous sommes dans une debian 10 bien que la machine hôte est une debian 11.
