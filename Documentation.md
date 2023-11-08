@@ -52,7 +52,7 @@ vagrant@zdeploy:~$ neofetch
 
 ### Configuration du script
 
-- On rend le script exécutable en utilisant la commade `chmod +x exo1.sh`
+- On rend le script exécutable en utilisant la commande `chmod +x exo1.sh`
 - On voit désormais grâce à `ls -l` que les permissions du script permettent de l'exécuter
 
 ```bash
@@ -264,25 +264,27 @@ hdddyo+ohddyosdddddddddho+oydddy++ohdddh
 
 ### Préparation de l'environnement
 
-- Install debootstrap et systemd-container
+- Tout d'abord nous devons commencer par installer les paquets que nous avons besoin :
+  - **debootstrap** : permet d'installer un système Debian de base dans un sous-répertoire
+  - **systemd-container** : outil pour gérer les containers systemd-nspawn
 
 ```bash
 vagrant@zdeploy:~$ sudo apt install debootstrap systemd-container
 ```
 
-- Créer dossier debian10
+- On créer le répertoire debian10 où nous allons mettre notre système debian10
 
 ```bash
 vagrant@zdeploy:~$ mkdir ~/debian10
 ```
 
-- Récupération debian10
+- Grâce au paquet debootstrap nous allons pouvoir installer créer un système de fichier minimal d'une debian 10 dans le répertoire debian10 bien que dans mon cas ma machine hôte est sur debian 11. Ceci grâce à la commande ci-dessous.
 
 ```bash
 vagrant@zdeploy:~$ sudo debootstrap buster ~/debian10 http://deb.debian.org/debian/
 ```
 
-- Vérification de l'environnement
+- Une fois le système de fichier de la debian 10 installé, on verifie l'installation. On peut voir que tout est prêt pour acceuillir notre conteneur.
 
 ```bash
 vagrant@zdeploy:~$ tree -d -L 1 debian10/
@@ -312,7 +314,7 @@ debian10/
 
 ### Création du conteneur systemd-nspawn
 
-- Lancement du conteneur
+- Pour créer notre conteneur nous allons utilisé la commande ci-dessous. Elle va nous permettre de monter notre conteneur avec comme racine notre répertoire debian10. On voit bien lors de la commande qu'on rentre directement dans le conteneur et que le hostname change.
 
 ```bash
 vagrant@zdeploy:~$ sudo systemd-nspawn -D ~/debian10
@@ -321,7 +323,7 @@ Press ^] three times within 1s to kill container.
 root@debian10:~#    
 ```
 
-- Install neofetch + verification
+- Une fois dans le conteneur on installe le paquet neofetch puis on l'exécute. Et on peut bien voir que la sortie nous montre que nous sommes dans une debian 10 bien que la machine hôte est une debian 11.
 
 ```bash
 root@debian10:~# apt install neofetch
