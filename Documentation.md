@@ -62,6 +62,8 @@ total 4
 -rwxr-xr-x 1 vagrant vagrant 921 Nov  6 22:29 exo1.sh
 ```
 
+- Dans mon script le binaire msnake se situe à /tmp/msnake
+
 ### Configuration de l'environnement chroot
 
 - On lance le script grâce à la commande `./exo1.sh`
