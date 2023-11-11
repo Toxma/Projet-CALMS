@@ -34,6 +34,7 @@
 <li><a href="#environnement-de-d%C3%A9part">Environnement de départ</a></li>
 <li><a href="#exercice-1--exe%CC%81cution-avec-chroot">Exercice 1 : Exécution avec chroot</a>
 <ul>
+<li><a href="#pr%C3%A9paration-de-lexercice-1">Préparation de l'exercice 1</a></li>
 <li><a href="#configuration-du-script">Configuration du script</a></li>
 <li><a href="#configuration-de-lenvironnement-chroot">Configuration de l'environnement chroot</a></li>
 <li><a href="#cr%C3%A9ation-du-chroot">Création du chroot</a></li>
@@ -48,7 +49,7 @@
 </li>
 <li><a href="#exercice-3--ex%C3%A9cution-sous-systemd-nspawn">Exercice 3 : Exécution sous systemd-nspawn</a>
 <ul>
-<li><a href="#pr%C3%A9paration-de-lenvironnement">Préparation de l'environnement</a></li>
+<li><a href="#pr%C3%A9paration-de-lexercice-2">Préparation de l'exercice 2</a></li>
 <li><a href="#cr%C3%A9ation-du-conteneur-systemd-nspawn">Création du conteneur systemd-nspawn</a></li>
 </ul>
 </li>
@@ -80,6 +81,11 @@
               `<span class="token string">""</span>"
 </code></pre><hr>
 <h2 id="exercice-1--exécution-avec-chroot">Exercice 1 : Exécution avec chroot </h2>
+<h3 id="préparation-de-lexercice-1">Préparation de l'exercice 1 </h3>
+<ul>
+<li>Récuperer le script <code>exo1.sh</code> dans le repértoire et le mettre sur sa machine.</li>
+<li>Récupérer le binaire <code>msnake</code> dans le repértoire et le mettre dans <code>/tmp</code> pour que le script le retrouve.</li>
+</ul>
 <h3 id="configuration-du-script">Configuration du script </h3>
 <ul>
 <li>On rend le script exécutable en utilisant la commande <code>chmod +x exo1.sh</code></li>
@@ -89,10 +95,7 @@
 vagrant@zdeploy:~$ <span class="token function">ls</span> <span class="token parameter variable">-l</span>
 total <span class="token number">4</span>
 -rwxr-xr-x <span class="token number">1</span> vagrant vagrant <span class="token number">921</span> Nov  <span class="token number">6</span> <span class="token number">22</span>:29 exo1.sh
-</code></pre><ul>
-<li>Dans mon script le binaire msnake se situe à /tmp/msnake</li>
-</ul>
-<h3 id="configuration-de-lenvironnement-chroot">Configuration de l'environnement chroot </h3>
+</code></pre><h3 id="configuration-de-lenvironnement-chroot">Configuration de l'environnement chroot </h3>
 <ul>
 <li>On lance le script grâce à la commande <code>./exo1.sh</code></li>
 <li>Ce script va permettre :
@@ -267,13 +270,16 @@ You just created an Alpinelinux edge x86_64 <span class="token punctuation">(</s
 <li>Le résultat de la commande nous valide la création de notre conteneur.</li>
 </ul>
 <h3 id="démarrage-et-connection-au-conteneur-lxc">Démarrage et connection au conteneur LXC </h3>
+<ul>
+<li>On démarre le conteneur avec la commande ci-dessous.</li>
+</ul>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> lxc-start <span class="token parameter variable">-n</span> alpine-container
 </code></pre><ul>
-<li>Ensuite on lance le conteneur grâce à la commande juste au dessus.</li>
+<li>Une fois le conteneur démarré nous allons nous connecter dessus afin d'avoir un shell et de pouvoir réaliser la suite de l'exercice.</li>
 </ul>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> lxc-attach <span class="token parameter variable">-n</span> alpine-container
 </code></pre><ul>
-<li>Une fois le conteneur up nous allons nous connecter dessus afin de pouvoir réaliser la suite de l'exercice grâce à la commande ci-dessus.</li>
+<li>On installe le packet neofetch grâce au gestionnaire apk et on lance la commande.</li>
 </ul>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>/ <span class="token comment"># apk add neofetch</span>
 / <span class="token comment"># neofetch</span>
@@ -297,9 +303,12 @@ hdddyo+ohddyosdddddddddho+oydddy++ohdddh
      /dddddddddddddddddddddddddddd/
       :dddddddddddddddddddddddddd:
        .hddddddddddddddddddddddh.
-</code></pre><hr>
+</code></pre><blockquote>
+<p>On peut voir grâce à neofetch que nous sommes bien dans un conteneur lxc sous Alpine Linux !!!</p>
+</blockquote>
+<hr>
 <h2 id="exercice-3--exécution-sous-systemd-nspawn">Exercice 3 : Exécution sous systemd-nspawn </h2>
-<h3 id="préparation-de-lenvironnement">Préparation de l'environnement </h3>
+<h3 id="préparation-de-lexercice-2">Préparation de l'exercice 2 </h3>
 <ul>
 <li>Tout d'abord nous devons commencer par installer les paquets que nous avons besoin :
 <ul>
@@ -314,7 +323,7 @@ hdddyo+ohddyosdddddddddho+oydddy++ohdddh
 </ul>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">mkdir</span> ~/debian10
 </code></pre><ul>
-<li>Grâce au paquet debootstrap nous allons pouvoir installer créer un système de fichier minimal d'une debian 10 dans le répertoire debian10 bien que dans mon cas ma machine hôte est sur debian 11. Ceci grâce à la commande ci-dessous.</li>
+<li>Grâce au paquet debootstrap nous allons pouvoir installer créer un système de fichier minimal d'une debian 10 (buster) dans le répertoire ~/debian10 bien que dans mon cas ma machine hôte est sur debian 11. Ceci grâce à la commande ci-dessous.</li>
 </ul>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> <span class="token function">debootstrap</span> buster ~/debian10 http://deb.debian.org/debian/
 </code></pre><ul>
@@ -364,7 +373,7 @@ root@debian10:~<span class="token comment"># neofetch </span>
 <span class="token variable">`</span></span>d$<span class="token string">$'     ,$P"'</span>   <span class="token builtin class-name">.</span>    <span class="token variable">$$</span>$    Uptime: <span class="token number">3</span> hours, <span class="token number">34</span> mins 
  <span class="token variable">$$</span>P      d<span class="token string">$'     ,    $$P    Packages: 223 (dpkg) 
  $$:      $$.   -    ,d$$'</span>    Shell: <span class="token function">bash</span> <span class="token number">5.0</span>.3 
- <span class="token variable">$$</span><span class="token punctuation">;</span>      Y<span class="token variable">$b</span>._   _,d<span class="token variable">$P</span><span class="token string">'      CPU: AMD Ryzen 5 5600 6- (2) @ 3.499GHz 
+ <span class="token variable">$$</span><span class="token punctuation">;</span>      Y<span class="token variable">$b</span>._   _,d<span class="token variable">$P</span><span class="token string">'      CPU: AMD Ryzen 5 5600 6- (2) @ 3.499GHz v
  Y$$.    `.`"Y$$$$P"'</span>         Memory: 88MiB / 1970MiB 
  <span class="token variable"><span class="token variable">`</span>$$b      "-.__
   <span class="token variable">`</span></span>Y<span class="token variable">$$</span>                                                
@@ -373,7 +382,10 @@ root@debian10:~<span class="token comment"># neofetch </span>
        <span class="token variable"><span class="token variable">`</span>Y$$b.
           <span class="token variable">`</span></span>"Y<span class="token variable">$b</span>._
               `<span class="token string">""</span>"
-</code></pre><hr>
+</code></pre><blockquote>
+<p>On peut voir grâce à neofetch que nous sommes bien dans un conteneur systemd-nspawn sous Debian 10 (buster) !!!</p>
+</blockquote>
+<hr>
 
       </div>
       

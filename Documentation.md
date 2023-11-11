@@ -8,6 +8,7 @@
   - [TOC](#toc)
   - [Environnement de départ](#environnement-de-départ)
   - [Exercice 1 : Exécution avec chroot](#exercice-1--exécution-avec-chroot)
+    - [Préparation de l'exercice 1](#préparation-de-lexercice-1)
     - [Configuration du script](#configuration-du-script)
     - [Configuration de l'environnement chroot](#configuration-de-lenvironnement-chroot)
     - [Création du chroot](#création-du-chroot)
@@ -16,7 +17,7 @@
     - [Création du conteneur LXC](#création-du-conteneur-lxc)
     - [Démarrage et connection au conteneur LXC](#démarrage-et-connection-au-conteneur-lxc)
   - [Exercice 3 : Exécution sous systemd-nspawn](#exercice-3--exécution-sous-systemd-nspawn)
-    - [Préparation de l'environnement](#préparation-de-lenvironnement)
+    - [Préparation de l'exercice 2](#préparation-de-lexercice-2)
     - [Création du conteneur systemd-nspawn](#création-du-conteneur-systemd-nspawn)
 
 ---
@@ -50,6 +51,11 @@ vagrant@zdeploy:~$ neofetch
 
 ## Exercice 1 : Exécution avec chroot
 
+### Préparation de l'exercice 1
+
+- Récuperer le script `exo1.sh` dans le repértoire et le mettre sur sa machine.
+- Récupérer le binaire `msnake` dans le repértoire et le mettre dans `/tmp` pour que le script le retrouve.
+
 ### Configuration du script
 
 - On rend le script exécutable en utilisant la commande `chmod +x exo1.sh`
@@ -61,8 +67,6 @@ vagrant@zdeploy:~$ ls -l
 total 4
 -rwxr-xr-x 1 vagrant vagrant 921 Nov  6 22:29 exo1.sh
 ```
-
-- Dans mon script le binaire msnake se situe à /tmp/msnake
 
 ### Configuration de l'environnement chroot
 
@@ -223,17 +227,19 @@ You just created an Alpinelinux edge x86_64 (20231105_13:00) container.
 
 ### Démarrage et connection au conteneur LXC
 
+- On démarre le conteneur avec la commande ci-dessous.
+
 ```bash
 vagrant@zdeploy:~$ sudo lxc-start -n alpine-container
 ```
 
-- Ensuite on lance le conteneur grâce à la commande juste au dessus.
+- Une fois le conteneur démarré nous allons nous connecter dessus afin d'avoir un shell et de pouvoir réaliser la suite de l'exercice.
 
 ```bash
 vagrant@zdeploy:~$ sudo lxc-attach -n alpine-container
 ```
 
-- Une fois le conteneur up nous allons nous connecter dessus afin de pouvoir réaliser la suite de l'exercice grâce à la commande ci-dessus.
+- On installe le packet neofetch grâce au gestionnaire apk et on lance la commande.
 
 ```bash
 / # apk add neofetch
@@ -260,11 +266,13 @@ hdddyo+ohddyosdddddddddho+oydddy++ohdddh
        .hddddddddddddddddddddddh.
 ```
 
+>On peut voir grâce à neofetch que nous sommes bien dans un conteneur lxc sous Alpine Linux !!!
+
 ---
 
 ## Exercice 3 : Exécution sous systemd-nspawn
 
-### Préparation de l'environnement
+### Préparation de l'exercice 2
 
 - Tout d'abord nous devons commencer par installer les paquets que nous avons besoin :
   - **debootstrap** : permet d'installer un système Debian de base dans un sous-répertoire
@@ -280,7 +288,7 @@ vagrant@zdeploy:~$ sudo apt install debootstrap systemd-container
 vagrant@zdeploy:~$ mkdir ~/debian10
 ```
 
-- Grâce au paquet debootstrap nous allons pouvoir installer créer un système de fichier minimal d'une debian 10 dans le répertoire debian10 bien que dans mon cas ma machine hôte est sur debian 11. Ceci grâce à la commande ci-dessous.
+- Grâce au paquet debootstrap nous allons pouvoir installer créer un système de fichier minimal d'une debian 10 (buster) dans le répertoire ~/debian10 bien que dans mon cas ma machine hôte est sur debian 11. Ceci grâce à la commande ci-dessous.
 
 ```bash
 vagrant@zdeploy:~$ sudo debootstrap buster ~/debian10 http://deb.debian.org/debian/
@@ -338,7 +346,7 @@ root@debian10:~# neofetch
 `d$$'     ,$P"'   .    $$$    Uptime: 3 hours, 34 mins 
  $$P      d$'     ,    $$P    Packages: 223 (dpkg) 
  $$:      $$.   -    ,d$$'    Shell: bash 5.0.3 
- $$;      Y$b._   _,d$P'      CPU: AMD Ryzen 5 5600 6- (2) @ 3.499GHz 
+ $$;      Y$b._   _,d$P'      CPU: AMD Ryzen 5 5600 6- (2) @ 3.499GHz v
  Y$$.    `.`"Y$$$$P"'         Memory: 88MiB / 1970MiB 
  `$$b      "-.__
   `Y$$                                                
@@ -348,5 +356,7 @@ root@debian10:~# neofetch
           `"Y$b._
               `"""
 ```
+
+>On peut voir grâce à neofetch que nous sommes bien dans un conteneur systemd-nspawn sous Debian 10 (buster) !!!
 
 ---
