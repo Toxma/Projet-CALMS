@@ -59,7 +59,7 @@ vagrant@zdeploy:~$ neofetch
 ### Configuration du script
 
 - On rend le script exécutable en utilisant la commande `chmod +x exo1.sh`
-- On voit désormais grâce à `ls -l` que les permissions du script permettent de l'exécuter
+- On voit désormais grâce à `ls -al` que les permissions du script permettent de l'exécuter
 
 ```bash
 chmod +x exo1.sh && ls -al exo1.sh
@@ -176,6 +176,8 @@ exo1
 ```bash
 sudo chroot exo1/ msnake
 ```
+
+⬇️⬇️⬇️
 
 ![Alt text](images/msnake.png)
 

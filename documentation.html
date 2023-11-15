@@ -91,9 +91,9 @@
 <li>On rend le script exécutable en utilisant la commande <code>chmod +x exo1.sh</code></li>
 <li>On voit désormais grâce à <code>ls -l</code> que les permissions du script permettent de l'exécuter</li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">chmod</span> +x exo1.sh 
-vagrant@zdeploy:~$ <span class="token function">ls</span> <span class="token parameter variable">-l</span>
-total <span class="token number">4</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">chmod</span> +x exo1.sh <span class="token operator">&amp;&amp;</span> <span class="token function">ls</span> <span class="token parameter variable">-al</span> exo1.sh
+</code></pre><p>⬇️⬇️⬇️</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>total <span class="token number">4</span>
 -rwxr-xr-x <span class="token number">1</span> vagrant vagrant <span class="token number">921</span> Nov  <span class="token number">6</span> <span class="token number">22</span>:29 exo1.sh
 </code></pre><h3 id="configuration-de-lenvironnement-chroot">Configuration de l'environnement chroot </h3>
 <ul>
@@ -108,8 +108,9 @@ total <span class="token number">4</span>
 </ul>
 </li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ tree exo1
-exo1
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>tree exo1
+</code></pre><p>⬇️⬇️⬇️</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>exo1
 ├── bin
 │   ├── <span class="token function">bash</span>
 │   ├── <span class="token function">ls</span>
@@ -194,8 +195,9 @@ exo1
 </ul>
 </li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> <span class="token function">chroot</span> exo1/ msnake
-</code></pre><p><img src="images/msnake.png" alt="Alt text"></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> <span class="token function">chroot</span> exo1/ msnake
+</code></pre><p>⬇️⬇️⬇️</p>
+<p><img src="images/msnake.png" alt="Alt text"></p>
 <blockquote>
 <p>Tout fonctionne comme prévu. On peut désormais jouer à snake !!!</p>
 </blockquote>
@@ -205,12 +207,12 @@ exo1
 <ul>
 <li>Pour ce 2ème exercice nous devons créer un conteneur grâce à LXC (Linux Containers). Pour se faire nous devons commencer par installer le paquet lxc sur notre environnement de travail, ceci grâce à la commande ci-dessous.</li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> lxc
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> lxc
 </code></pre><h3 id="création-du-conteneur-lxc">Création du conteneur LXC </h3>
 <ul>
 <li>Une fois le paquet installé, nous pouvons désormais l'utiliser afin de créer des conteneurs. Pour faire ceci nous allons utiliser la commande ci-dessous qui va nous permettre de précisez les informations suivantes :</li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> lxc-create <span class="token parameter variable">-n</span> alpine-container <span class="token parameter variable">-t</span> download -- <span class="token parameter variable">--dist</span> alpine <span class="token parameter variable">--release</span> edge
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> lxc-create <span class="token parameter variable">-n</span> alpine-container <span class="token parameter variable">-t</span> download -- <span class="token parameter variable">--dist</span> alpine <span class="token parameter variable">--release</span> edge
 </code></pre><table>
 <thead>
 <tr>
@@ -273,11 +275,11 @@ You just created an Alpinelinux edge x86_64 <span class="token punctuation">(</s
 <ul>
 <li>On démarre le conteneur avec la commande ci-dessous.</li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> lxc-start <span class="token parameter variable">-n</span> alpine-container
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> lxc-start <span class="token parameter variable">-n</span> alpine-container
 </code></pre><ul>
 <li>Une fois le conteneur démarré nous allons nous connecter dessus afin d'avoir un shell et de pouvoir réaliser la suite de l'exercice.</li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> lxc-attach <span class="token parameter variable">-n</span> alpine-container
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> lxc-attach <span class="token parameter variable">-n</span> alpine-container
 </code></pre><ul>
 <li>On installe le packet neofetch grâce au gestionnaire apk et on lance la commande.</li>
 </ul>
@@ -317,20 +319,21 @@ hdddyo+ohddyosdddddddddho+oydddy++ohdddh
 </ul>
 </li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">debootstrap</span> systemd-container
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">debootstrap</span> systemd-container
 </code></pre><ul>
 <li>On créer le répertoire debian10 où nous allons mettre notre système debian10</li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">mkdir</span> ~/debian10
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">mkdir</span> ~/debian10
 </code></pre><ul>
 <li>Grâce au paquet debootstrap nous allons pouvoir installer créer un système de fichier minimal d'une debian 10 (buster) dans le répertoire ~/debian10 bien que dans mon cas ma machine hôte est sur debian 11. Ceci grâce à la commande ci-dessous.</li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> <span class="token function">debootstrap</span> buster ~/debian10 http://deb.debian.org/debian/
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> <span class="token function">debootstrap</span> buster ~/debian10 http://deb.debian.org/debian/
 </code></pre><ul>
 <li>Une fois le système de fichier de la debian 10 installé, on verifie l'installation. On peut voir que tout est prêt pour acceuillir notre conteneur.</li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ tree <span class="token parameter variable">-d</span> <span class="token parameter variable">-L</span> <span class="token number">1</span> debian10/
-debian10/
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>tree <span class="token parameter variable">-d</span> <span class="token parameter variable">-L</span> <span class="token number">1</span> debian10/
+</code></pre><p>⬇️⬇️⬇️</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>debian10/
 ├── bin -<span class="token operator">&gt;</span> usr/bin
 ├── boot
 ├── dev
@@ -356,8 +359,9 @@ debian10/
 <ul>
 <li>Pour créer notre conteneur nous allons utilisé la commande ci-dessous. Elle va nous permettre de monter notre conteneur avec comme racine notre répertoire debian10. On voit bien lors de la commande qu'on rentre directement dans le conteneur et que le hostname change.</li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>vagrant@zdeploy:~$ <span class="token function">sudo</span> systemd-nspawn <span class="token parameter variable">-D</span> ~/debian10
-Spawning container debian10 on /home/vagrant/debian10.
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> systemd-nspawn <span class="token parameter variable">-D</span> ~/debian10
+</code></pre><p>⬇️⬇️⬇️</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>Spawning container debian10 on /home/vagrant/debian10.
 Press ^<span class="token punctuation">]</span> three <span class="token builtin class-name">times</span> within 1s to <span class="token function">kill</span> container.
 root@debian10:~<span class="token comment">#</span>
 </code></pre><ul>
