@@ -62,8 +62,12 @@ vagrant@zdeploy:~$ neofetch
 - On voit désormais grâce à `ls -l` que les permissions du script permettent de l'exécuter
 
 ```bash
-vagrant@zdeploy:~$ chmod +x exo1.sh 
-vagrant@zdeploy:~$ ls -l
+chmod +x exo1.sh && ls -al exo1.sh
+```
+
+⬇️⬇️⬇️
+
+```bash
 total 4
 -rwxr-xr-x 1 vagrant vagrant 921 Nov  6 22:29 exo1.sh
 ```
@@ -79,7 +83,12 @@ total 4
   - Copier les librairies du terminal présentent dans **/lib/terminfo**
 
 ```bash
-vagrant@zdeploy:~$ tree exo1
+tree exo1
+```
+
+⬇️⬇️⬇️
+
+```bash
 exo1
 ├── bin
 │   ├── bash
@@ -165,7 +174,7 @@ exo1
   - Lancer le binaire msnake
 
 ```bash
-vagrant@zdeploy:~$ sudo chroot exo1/ msnake
+sudo chroot exo1/ msnake
 ```
 
 ![Alt text](images/msnake.png)
@@ -181,7 +190,7 @@ vagrant@zdeploy:~$ sudo chroot exo1/ msnake
 - Pour ce 2ème exercice nous devons créer un conteneur grâce à LXC (Linux Containers). Pour se faire nous devons commencer par installer le paquet lxc sur notre environnement de travail, ceci grâce à la commande ci-dessous.
 
 ```bash
-vagrant@zdeploy:~$ sudo apt install lxc
+sudo apt install lxc
 ```
 
 ### Création du conteneur LXC
@@ -189,7 +198,7 @@ vagrant@zdeploy:~$ sudo apt install lxc
 - Une fois le paquet installé, nous pouvons désormais l'utiliser afin de créer des conteneurs. Pour faire ceci nous allons utiliser la commande ci-dessous qui va nous permettre de précisez les informations suivantes :
 
 ```bash
-vagrant@zdeploy:~$ sudo lxc-create -n alpine-container -t download -- --dist alpine --release edge
+sudo lxc-create -n alpine-container -t download -- --dist alpine --release edge
 ```
 
 | Option              | Utilité                                                 |
@@ -230,13 +239,13 @@ You just created an Alpinelinux edge x86_64 (20231105_13:00) container.
 - On démarre le conteneur avec la commande ci-dessous.
 
 ```bash
-vagrant@zdeploy:~$ sudo lxc-start -n alpine-container
+sudo lxc-start -n alpine-container
 ```
 
 - Une fois le conteneur démarré nous allons nous connecter dessus afin d'avoir un shell et de pouvoir réaliser la suite de l'exercice.
 
 ```bash
-vagrant@zdeploy:~$ sudo lxc-attach -n alpine-container
+sudo lxc-attach -n alpine-container
 ```
 
 - On installe le packet neofetch grâce au gestionnaire apk et on lance la commande.
@@ -279,25 +288,30 @@ hdddyo+ohddyosdddddddddho+oydddy++ohdddh
   - **systemd-container** : outil pour gérer les containers systemd-nspawn
 
 ```bash
-vagrant@zdeploy:~$ sudo apt install debootstrap systemd-container
+sudo apt install debootstrap systemd-container
 ```
 
 - On créer le répertoire debian10 où nous allons mettre notre système debian10
 
 ```bash
-vagrant@zdeploy:~$ mkdir ~/debian10
+mkdir ~/debian10
 ```
 
 - Grâce au paquet debootstrap nous allons pouvoir installer créer un système de fichier minimal d'une debian 10 (buster) dans le répertoire ~/debian10 bien que dans mon cas ma machine hôte est sur debian 11. Ceci grâce à la commande ci-dessous.
 
 ```bash
-vagrant@zdeploy:~$ sudo debootstrap buster ~/debian10 http://deb.debian.org/debian/
+sudo debootstrap buster ~/debian10 http://deb.debian.org/debian/
 ```
 
 - Une fois le système de fichier de la debian 10 installé, on verifie l'installation. On peut voir que tout est prêt pour acceuillir notre conteneur.
 
 ```bash
-vagrant@zdeploy:~$ tree -d -L 1 debian10/
+tree -d -L 1 debian10/
+```
+
+⬇️⬇️⬇️
+
+```bash
 debian10/
 ├── bin -> usr/bin
 ├── boot
@@ -327,7 +341,12 @@ debian10/
 - Pour créer notre conteneur nous allons utilisé la commande ci-dessous. Elle va nous permettre de monter notre conteneur avec comme racine notre répertoire debian10. On voit bien lors de la commande qu'on rentre directement dans le conteneur et que le hostname change.
 
 ```bash
-vagrant@zdeploy:~$ sudo systemd-nspawn -D ~/debian10
+sudo systemd-nspawn -D ~/debian10
+```
+
+⬇️⬇️⬇️
+
+```bash
 Spawning container debian10 on /home/vagrant/debian10.
 Press ^] three times within 1s to kill container.
 root@debian10:~#
