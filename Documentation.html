@@ -1,9 +1,9 @@
 <!DOCTYPE html><html><head>
-      <title>documentation</title>
+      <title>Documentation</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="file:///c:\Users\Matteo\.vscode-oss\extensions\shd101wyy.markdown-preview-enhanced-0.8.10-universal\crossnote\dependencies\katex\katex.min.css">
+      <link rel="stylesheet" href="file:////home/matteoz/.vscode-oss/extensions/shd101wyy.markdown-preview-enhanced-0.8.10-universal/crossnote/dependencies/katex/katex.min.css">
       
       
       
@@ -49,7 +49,7 @@
 </li>
 <li><a href="#exercice-3--ex%C3%A9cution-sous-systemd-nspawn">Exercice 3 : Exécution sous systemd-nspawn</a>
 <ul>
-<li><a href="#pr%C3%A9paration-de-lexercice-2">Préparation de l'exercice 2</a></li>
+<li><a href="#pr%C3%A9paration-de-lexercice-3">Préparation de l'exercice 3</a></li>
 <li><a href="#cr%C3%A9ation-du-conteneur-systemd-nspawn">Création du conteneur systemd-nspawn</a></li>
 </ul>
 </li>
@@ -89,7 +89,7 @@
 <h3 id="configuration-du-script">Configuration du script </h3>
 <ul>
 <li>On rend le script exécutable en utilisant la commande <code>chmod +x exo1.sh</code></li>
-<li>On voit désormais grâce à <code>ls -l</code> que les permissions du script permettent de l'exécuter</li>
+<li>On voit désormais grâce à <code>ls -al</code> que les permissions du script permettent de l'exécuter</li>
 </ul>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">chmod</span> +x exo1.sh <span class="token operator">&amp;&amp;</span> <span class="token function">ls</span> <span class="token parameter variable">-al</span> exo1.sh
 </code></pre><p>⬇️⬇️⬇️</p>
@@ -277,7 +277,25 @@ You just created an Alpinelinux edge x86_64 <span class="token punctuation">(</s
 </ul>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> lxc-start <span class="token parameter variable">-n</span> alpine-container
 </code></pre><ul>
-<li>Une fois le conteneur démarré nous allons nous connecter dessus afin d'avoir un shell et de pouvoir réaliser la suite de l'exercice.</li>
+<li>On vérifie son état avec la commande suivante :</li>
+</ul>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> lxc-info alpine-container
+</code></pre><p>⬇️⬇️⬇️</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>Name:           alpine-container
+State:          RUNNING
+PID:            <span class="token number">64335</span>
+IP:             <span class="token number">10.0</span>.3.103
+Link:           vethSDKsat
+ TX bytes:      <span class="token number">1.43</span> KiB
+ RX bytes:      <span class="token number">8.71</span> KiB
+ Total bytes:   <span class="token number">10.14</span> KiB
+</code></pre><ul>
+<li>
+<p>On voit bien que le conteneur est en état : RUNNING.</p>
+</li>
+<li>
+<p>Une fois le conteneur démarré nous allons nous connecter dessus afin d'avoir un shell et de pouvoir réaliser la suite de l'exercice.</p>
+</li>
 </ul>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">sudo</span> lxc-attach <span class="token parameter variable">-n</span> alpine-container
 </code></pre><ul>
@@ -310,7 +328,7 @@ hdddyo+ohddyosdddddddddho+oydddy++ohdddh
 </blockquote>
 <hr>
 <h2 id="exercice-3--exécution-sous-systemd-nspawn">Exercice 3 : Exécution sous systemd-nspawn </h2>
-<h3 id="préparation-de-lexercice-2">Préparation de l'exercice 2 </h3>
+<h3 id="préparation-de-lexercice-3">Préparation de l'exercice 3 </h3>
 <ul>
 <li>Tout d'abord nous devons commencer par installer les paquets que nous avons besoin :
 <ul>

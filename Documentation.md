@@ -17,7 +17,7 @@
     - [Création du conteneur LXC](#création-du-conteneur-lxc)
     - [Démarrage et connection au conteneur LXC](#démarrage-et-connection-au-conteneur-lxc)
   - [Exercice 3 : Exécution sous systemd-nspawn](#exercice-3--exécution-sous-systemd-nspawn)
-    - [Préparation de l'exercice 2](#préparation-de-lexercice-2)
+    - [Préparation de l'exercice 3](#préparation-de-lexercice-3)
     - [Création du conteneur systemd-nspawn](#création-du-conteneur-systemd-nspawn)
 
 ---
@@ -244,6 +244,27 @@ You just created an Alpinelinux edge x86_64 (20231105_13:00) container.
 sudo lxc-start -n alpine-container
 ```
 
+- On vérifie son état avec la commande suivante :
+
+```bash
+sudo lxc-info alpine-container
+```
+
+⬇️⬇️⬇️
+
+```bash
+Name:           alpine-container
+State:          RUNNING
+PID:            64335
+IP:             10.0.3.103
+Link:           vethSDKsat
+ TX bytes:      1.43 KiB
+ RX bytes:      8.71 KiB
+ Total bytes:   10.14 KiB
+```
+
+- On voit bien que le conteneur est en état : RUNNING.
+
 - Une fois le conteneur démarré nous allons nous connecter dessus afin d'avoir un shell et de pouvoir réaliser la suite de l'exercice.
 
 ```bash
@@ -283,7 +304,7 @@ hdddyo+ohddyosdddddddddho+oydddy++ohdddh
 
 ## Exercice 3 : Exécution sous systemd-nspawn
 
-### Préparation de l'exercice 2
+### Préparation de l'exercice 3
 
 - Tout d'abord nous devons commencer par installer les paquets que nous avons besoin :
   - **debootstrap** : permet d'installer un système Debian de base dans un sous-répertoire
